@@ -1,1 +1,2 @@
-###This Repository is a simple String Class that I made on my own.
+# String Class with C++
+This Repository contains String Class made with C++, the purpose of this Class is just for learning.
