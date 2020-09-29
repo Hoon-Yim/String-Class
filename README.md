@@ -54,3 +54,29 @@ str.capacity(); // 10
 The reason for the existence of 'Capacity' is for minimal memory allocation. <br />
 It could reduce time wasting for allocating. <br />
 If the Capacity is too big to contain new String, it does not have to reallocate the size of the memory.
+
+## Insert
+```C++
+// main function
+String str("Hello World");
+str.capacity(); // 11
+
+str.Insert(6, "to this ");
+str.capacity(); // 11 + 8
+
+str.print(); // output: Hello to this World
+
+----------------------------------------------
+
+String str("Hello World");
+str.capacity(); // 11
+str.Reverse(20); // 20
+
+str.Insert(6, "to this ");
+str.capacity(); // 20 because the capacity is already enough to insert "to this"
+
+str.print(); // output: Hello to this World
+```
+This function literally allows to insert a string. <br />
+If capacity is not enough to insert, <br />
+it will automatically extend its capacity by length of string.
