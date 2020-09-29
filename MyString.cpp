@@ -50,7 +50,7 @@ void String::println() const {
 }
 
 // Assign
-void String::Assign(const String &str) {
+String& String::Assign(const String &str) {
     if(mMemCap < str.mStrlen) {
         delete[] mString;
         mMemCap = str.mMemCap;
@@ -61,7 +61,7 @@ void String::Assign(const String &str) {
     for(int i = 0; i < mStrlen; i++)
         mString[i] = str.mString[i];
 }
-void String::Assign(const char *str) {
+String& String::Assign(const char *str) {
     int StrLen = strlen(str);
     if(mMemCap < StrLen) {
         delete[] mString;
@@ -74,7 +74,7 @@ void String::Assign(const char *str) {
         mString[i] = str[i];
 }
 // Reserve
-void String::Reserve(int size) {
+String& String::Reserve(int size) {
     if(size > mMemCap) {
         char *temp = mString;
 
@@ -85,9 +85,61 @@ void String::Reserve(int size) {
             mString[i] = temp[i];
 
         delete[] temp;
+        return *this;
     }
     // There's reason to set 'else' part;
     // 'Cause int size has to be larger than previous Memory Capacity;
+}
+
+String& String::Insert(int loc, const String &str) {
+    if(loc < 0 || loc > mStrlen)
+        return *this;
+
+    if(mStrlen + str.mStrlen > mMemCap) {
+        // initialize Capacity
+        mMemCap = mStrlen + str.mStrlen;
+
+        // save previous Content of String
+        // and reallocate memory
+        char *temp = mString;
+        mString = new char[mMemCap];
+
+
+        int i;
+        for(i = 0; i < loc; i++) // Saving Content right before location
+            mString[i] = temp[i];
+
+        for(int j = 0; j < str.mStrlen; j++) // Inserting
+            mString[j + loc] = str.mString[j];
+
+        for(; i < mStrlen + str.mStrlen; i++) // Adding remaining elements of string
+            mString[i + str.mStrlen] = temp[i];
+
+        delete[] temp;
+        mStrlen += str.mStrlen;
+        return *this;
+   }
+
+    // if Capacity is enough to insert
+    // it does not have to adjust Capacity
+
+    // For loop down below, push elements of string back
+    for(int i = mStrlen - 1; i >= loc; i--)
+        mString[i + str.mStrlen] = mString[i];
+
+    for(int i = 0; i < str.mStrlen; i++)
+        mString[i + loc] = str.mString[i];
+
+    mStrlen += str.mStrlen;
+    return *this;
+}
+String& String::Insert(int loc, const char *str) {
+    String temp(str);
+    return Insert(loc, temp);
+}
+String& String::Insert(int loc, char c) {
+    String temp(c);
+    return Insert(loc, temp);
 }
 
 

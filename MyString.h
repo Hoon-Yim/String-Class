@@ -26,10 +26,14 @@ public:
     void println() const;
 
     // Assign
-    void Assign(const String &str);
-    void Assign(const char *str);
+    String& Assign(const String &str);
+    String& Assign(const char *str);
     // Reserve
-    void Reserve(int size);
+    String& Reserve(int size);
+    // Insert
+    String& Insert(int loc, const String &str);
+    String& Insert(int loc, const char *str);
+    String& Insert(int loc, char c);
 
     // Destructor
     ~String();

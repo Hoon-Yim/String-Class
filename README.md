@@ -1,6 +1,7 @@
 # String Class with C++
-This Repository contains String Class made with C++, the purpose of this Class is just for learning.
+This Repository contains String Class made with C++, <br /> the purpose of this Class is just for learning.
 
+[Reference](https://modoocode.com/198) <- Korean C++ Tutorial
 ## Constructor
 ```C++
 // main function
@@ -18,6 +19,7 @@ Every object except copy constructor have to be explicitly initialized.
 // main function
 String str("Hello World");
 str.print(); // output: Hello World
+
 str.Assign("Assigning has been completely done");
 str.print(); // output: Assigning has been completely done
 ```
@@ -28,7 +30,10 @@ As you can see code below, this approach is also possible.
 ```C++
 // main function
 String str("Hello World Again");
-String str2(str);
+str.print(); // Hello World Again
+
+str.Assign("Not Hello World");
+str.print(); // Not Hello World
 ```
 
 ## Reserve
@@ -41,6 +46,11 @@ str.capacity(); // 5
 str.reserve(10); 
 
 str.capacity(); // 10
+
 // But the Length of String is still 5
 // Capacity and size is totally different
 ```
+
+The reason for the existence of 'Capacity' is for minimal memory allocation. <br />
+It could reduce time wasting for allocating. <br />
+If the Capacity is too big to contain new String, it does not have to reallocate the size of the memory.
