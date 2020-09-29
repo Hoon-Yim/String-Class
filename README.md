@@ -80,3 +80,15 @@ str.print(); // output: Hello to this World
 This function literally allows to insert a string. <br />
 If capacity is not enough to insert, <br />
 it will automatically extend its capacity by length of string.
+
+## Compare
+```C++
+String str("Hello World");
+String str2("Hello World");
+
+if(str.Compare(str2))
+    std::cout << "str and str2 is ths same" << std::endl;
+```
+
+If both strings are the same, it will return 1 which is TRUE value. <br />
+Or not, it is going to return 0 which is FALSE value.

@@ -84,7 +84,7 @@ String& String::Reserve(int size) {
     // There's reason to set 'else' part;
     // 'Cause int size has to be larger than previous Memory Capacity;
 }
-
+// Insert
 String& String::Insert(int loc, const String &str) {
     if(loc < 0 || loc > mStrlen)
         return *this;
@@ -138,8 +138,18 @@ String& String::Insert(int loc, char c) {
     String temp(c);
     return Insert(loc, temp);
 }
+// Compare
+int String::Compare(const String &str) const {
+    if(mStrlen != str.mStrlen)
+        return 0;
 
+    for(int i = 0; i < mStrlen; i++) {
+        if(mString[i] != str.mString[i])
+            return 0;
+    }
 
+    return 1;
+}
 // Destructor
 String::~String() {
     delete[] mString;

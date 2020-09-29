@@ -34,6 +34,8 @@ public:
     String& Insert(int loc, const String &str);
     String& Insert(int loc, const char *str);
     String& Insert(int loc, char c);
+    // Compare
+    int Compare(const String &str) const;
 
     // Destructor
     ~String();
