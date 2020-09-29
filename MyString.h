@@ -19,7 +19,7 @@ public:
     String(const String &str);
 
     // Return && Print
-    [[nodiscard]] int GetStrlen() const;
+    [[nodiscard]] int length() const;
     [[nodiscard]] char at(int location) const;
     [[nodiscard]] int capacity() const;
     void print() const;

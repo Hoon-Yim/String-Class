@@ -7,7 +7,7 @@
 #include "MyString.h"
 
 // Constructor
-[[maybe_unused]] String::String(char c) {
+String::String(char c) {
     mStrlen = 1;
     mMemCap = 1;
     mString = new char[1];
@@ -31,7 +31,7 @@ String::String(const String &str) {
 }
 
 // Return && Print
-int String::GetStrlen() const { return mStrlen; }
+int String::length() const { return mStrlen; }
 int String::capacity() const { return mMemCap; }
 char String::at(int location) const {
     if(location < 0 || location > mStrlen)
@@ -60,18 +60,12 @@ String& String::Assign(const String &str) {
     mStrlen = str.mStrlen;
     for(int i = 0; i < mStrlen; i++)
         mString[i] = str.mString[i];
+
+    return *this;
 }
 String& String::Assign(const char *str) {
-    int StrLen = strlen(str);
-    if(mMemCap < StrLen) {
-        delete[] mString;
-        mMemCap = StrLen;
-        mString = new char[StrLen];
-    }
-
-    mStrlen = StrLen;
-    for(int i = 0; i < StrLen; i++)
-        mString[i] = str[i];
+    String temp(str);
+    return Assign(temp);
 }
 // Reserve
 String& String::Reserve(int size) {
@@ -97,7 +91,10 @@ String& String::Insert(int loc, const String &str) {
 
     if(mStrlen + str.mStrlen > mMemCap) {
         // initialize Capacity
-        mMemCap = mStrlen + str.mStrlen;
+        if(mStrlen + str.mStrlen < mMemCap * 2)
+            mMemCap *= 2;
+        else
+            mMemCap = mStrlen + str.mStrlen;
 
         // save previous Content of String
         // and reallocate memory
